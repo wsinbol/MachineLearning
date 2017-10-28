@@ -1,5 +1,4 @@
 # MachineLearning
-Machine Learning in action
 1.计算香农熵
-2.特征划分
-3.找出最优解
+2.按特征划分数据集
+3.找出最好的数据集划分解
