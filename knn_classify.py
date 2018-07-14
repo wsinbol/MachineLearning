@@ -24,12 +24,19 @@ def knn_classify(unknow_data, test_data, k, test_labels):
 	row = test_data.shape[0] # 获取已知数组的行数
 	unknow_data_array = np.tile(unknow_data, (row, 1)) # 构造同已知数组相同的结构
 	distance = unknow_data_array - test_data # 求差
-	print(distance)
+	# print(distance)
 	# print(distance.sum()) # 参数为空整体求和
 	# print(distance.sum(axis = 0)) # 参数为0列求和
 	distance_sum = distance.sum(axis = 1) # 参数为1行求和
 	distance_list = distance_sum**2
 	distance_index = distance_list.argsort() # 返回升序排列的索引
+	'''
+	# 返回降序排列的索引
+	distance_list = list(distance_index)
+	reverse_list = distance_list.reverse()
+	print(distance_list)
+	print(distance_index)
+	'''
 
 	result = {}
 	for i in range(k):
