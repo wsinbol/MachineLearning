@@ -29,6 +29,7 @@ KNN 算法改进：
 '''
 
 import numpy as np
+import matplotlib.pyplot as plt
 
 class KNN(object):
 
@@ -42,13 +43,14 @@ class KNN(object):
 			[2,2],
 		])
 
-		test_labels = ['a','c','a','a','b']
+		test_labels = ['A','A','B','B','A']
 		return test_data, test_labels
 
 	def knnClassifier(self, unknow_data, test_data, test_labels, k=3):
 		rows, cols = np.shape(test_data)
-		unknow_data_matrix = np.tile(unknow_data, (rows, 1))
-		distance_matrix = test_data - unknow_data_matrix
+		# unknow_data_matrix = np.tile(unknow_data, (rows, 1))
+		# distance_matrix = test_data - unknow_data_matrix
+		distance_matrix = test_data - unknow_data
 		square_distance_matrix = distance_matrix**2
 		# sum() 参数为空：整体求和; axis=0:对列求和；axis=1:对行求和
 		# 当前坐标与已知坐标距离矩阵
@@ -76,10 +78,18 @@ class KNN(object):
 if __name__ == '__main__':
 	knn = KNN()
 	test_data, test_labels = knn.loadInitDataSet()
-	unknow_data = [1, 1]
+	unknow_data = [1, 2]
 	K = 3
 	predict_result = knn.knnClassifier(unknow_data, test_data, test_labels,k=K)
+
+	plt.axis([0,4,0,4])
+	for item in range(len(test_data)):
+		plt.text(test_data[item][0], test_data[item][1],test_labels[item])
+
 	print('分类情况：',predict_result)
 	recommand_label = predict_result[0][0]
 	print('推荐分类：',recommand_label)
+	plt.text(unknow_data[0], unknow_data[1],recommand_label, color='red')
+	plt.show()
+
 
